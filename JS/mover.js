@@ -13,6 +13,7 @@ function handleIntersection(entries, observer) {
     }
   });
 }
+
 var state = 0;
 
 function expand(){
@@ -48,7 +49,7 @@ function expansion(){
     setTimeout(function() {
       console.log('Task is complete.');
       resolve();
-    }, 1000);
+    }, 500);
   });
 }
 
@@ -61,6 +62,54 @@ function retraction(){
       resolve();
     }, 1000);
 
+  });
+}
+
+const img1Element = document.querySelector("#imgs1");
+const observer1 = new IntersectionObserver(handleIntersection1, {
+    threshold: 0.5,
+  });
+
+observer1.observe(img1Element);
+  
+function handleIntersection1(entries, observer1) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      var img1 = document.getElementById("img-1");
+      img1.style.transform = "translateX(0%)";
+      var img2 = document.getElementById("img-2");
+      img2.style.transform = "translateX(-7%)";
+      var line = document.getElementById("blue-line1");
+      line.style.transform = "translate(-50%, -100%)"
+      setTimeout(function(){
+        line.style.transform = "translate(-50%, 0%)"
+      }, 1000);
+      observer1.unobserve(entry.target);
+    }
+  });
+}
+
+const img2Element = document.querySelector("#imgs2");
+const observer2 = new IntersectionObserver(handleIntersection2, {
+    threshold: 0.5,
+  });
+
+observer2.observe(img2Element);
+  
+function handleIntersection2(entries, observer1) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      
+      var img1 = document.getElementById("img-3");
+      img1.style.transform = "translateX(0%)";
+      console.log(img1);
+      var line = document.getElementById("blue-line2");
+      line.style.transform = "translate(-50%, 100%)"
+      setTimeout(function(){
+        line.style.transform = "translate(-50%, 0%)"
+      }, 1000);
+      observer2.unobserve(entry.target);
+    }
   });
 }
 
