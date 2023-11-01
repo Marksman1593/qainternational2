@@ -17,15 +17,18 @@ function handleIntersection(entries, observer) {
 var state = 0;
 
 function expand(){
-  var navbar = document.getElementsByClassName("nav");
+  var black = document.getElementById("black");
   var contactus = document.getElementById("contactus");
     
   let response = expansion().then(result => {
     if(state==1){
       contactus.classList.add("expansion");
+      black.style.background = "rgba(0, 0, 0, 0.5)";
     }
     else{
       contactus.classList.remove("expansion");
+      black.style.display = "";
+      contact.innerHTML = "Contact Us";
       // retraction().then(result1 => {
       //   contactus.style.display = "none";
       // });
@@ -37,13 +40,22 @@ function expand(){
 function expansion(){
   return new Promise(function(resolve, reject) {
     var navbar = document.getElementsByClassName("nav");
+    var black = document.getElementById("black");
+    var contact = document.getElementById("contact");
+    var nav2 = document.getElementById("nav2");
+
     nav = navbar[0];
     if(!nav.classList.contains("expanded") && state == 0){
       nav.classList.add("expanded");
+      black.style.display = "block";
+      nav2.style.width = "5%";
+      contact.innerHTML = "X";
       state = 1;
     }
     else{
       nav.classList.remove("expanded");
+      black.style.background = "";
+      nav2.style.width = "19%";
       state = 0;
     }
     setTimeout(function() {
@@ -102,7 +114,7 @@ function handleIntersection2(entries, observer1) {
       
       var img1 = document.getElementById("img-3");
       img1.style.transform = "translateX(0%)";
-      console.log(img1);
+      // console.log(img1);
       var line = document.getElementById("blue-line2");
       line.style.transform = "translate(-50%, 100%)"
       setTimeout(function(){
